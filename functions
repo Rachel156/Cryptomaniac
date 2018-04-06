@@ -1,1 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+#define OUTT "return.txt"
 
+void input_text_to_array_x_encrypt()
+{
+    char file_name[20];             //creates string where a file name can go
+    printf("Enter a file name including the extension (txt, csv, ect.) \n");      //prompts user to enter a file name
+    scanf("%s",&file_name);     //stores file name in file_name
+    FILE * name_in = fopen(file_name, "r");     //tells computer to open and read file_name
+    if(name_in == NULL)
+    {
+        printf("Error: input file does not exist \n");          //if...else statement to let user know if file exists
+        printf("Exeqution terminated \n");
+    }
+    else
+       {
+         printf("This file exists, open return.txt file to see your encrypted text. \n");
+       }
+    int m=0;
+    char x[1];      //entire text without spaces can fit in one location
+    while (!feof(name_in)) //while you have not reached the end of this file, do this
+{
+    fscanf(name_in,"%s",&x[m]);       //read name_in file and store characters in x array
+}
+    FILE*out_file=fopen(OUTT,"w");      //write an output file
+    int j;
+    for(j=0;j<strlen(x)-1;j++)  //strlen(x) gives the length of the array (number of characters in text file)
+    {
+        fprintf(out_file,"%c",x[j]+1);  //printed letters are one after original letters
+    }
+}
