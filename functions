@@ -1,18 +1,28 @@
 #include <stdio.h>
 #include <string.h>
-#define OUTT "return.txt"
-
+#define EC "encrypted.txt"
+#define DC "decrypted.txt"
 void encrypt(char*array,int length)
 {
-    FILE*out_file=fopen(OUTT,"w");      //write an output file
+    FILE*out_file=fopen(EC,"w");
     int j;
-    for(j=0;j<length-1;j++)
+    for(j=0;j<length;j++)
     {
-        fprintf(out_file,"%c",array[j]+1);      //printed letters are one after original letters
+        fprintf(out_file,"%c",array[j]+1);
     }
     fclose(out_file);
 }
 
+void decrypt(char*array,int length)
+{
+    FILE*out_file=fopen(DC,"w");
+    int j;
+    for(j=0;j<length;j++)
+    {
+        fprintf(out_file,"%c",array[j]-1);
+    }
+    fclose(out_file);
+}
 
 void input_text_to_array_x_encrypt_decrypt()
 {
@@ -27,13 +37,26 @@ void input_text_to_array_x_encrypt_decrypt()
     }
     else
        {
-         printf("This file exists, open return.txt file to see your encrypted text. \n");
+         printf("This file exists; Enter 1 if you would like to encrypt this text and 2 is you would like to decrypt this text.\n");
        }
+
     int m=0;
     char x[1];      //entire text without spaces can fit in one location
     while (!feof(name_in)) //while you have not reached the end of this file, do this
 {
     fscanf(name_in,"%s",&x[m]);       //read name_in file and store characters in x array
 }
-    encrypt(x,strlen(x));       //calls function encrypt to encrypt text
+    int num;
+    scanf("%d",&num);
+    if (num==1)
+    {
+       encrypt(x,strlen(x));
+    }
+    else
+    {
+      decrypt(x,strlen(x));
+    }
+    fclose(name_in);
 }
+
+
