@@ -2,7 +2,19 @@
 #include <string.h>
 #define OUTT "return.txt"
 
-void input_text_to_array_x_encrypt()
+void encrypt(char*array,int length)
+{
+    FILE*out_file=fopen(OUTT,"w");      //write an output file
+    int j;
+    for(j=0;j<length-1;j++)
+    {
+        fprintf(out_file,"%c",array[j]+1);      //printed letters are one after original letters
+    }
+    fclose(out_file);
+}
+
+
+void input_text_to_array_x_encrypt_decrypt()
 {
     char file_name[20];             //creates string where a file name can go
     printf("Enter a file name including the extension (txt, csv, ect.) \n");      //prompts user to enter a file name
@@ -23,10 +35,5 @@ void input_text_to_array_x_encrypt()
 {
     fscanf(name_in,"%s",&x[m]);       //read name_in file and store characters in x array
 }
-    FILE*out_file=fopen(OUTT,"w");      //write an output file
-    int j;
-    for(j=0;j<strlen(x)-1;j++)  //strlen(x) gives the length of the array (number of characters in text file)
-    {
-        fprintf(out_file,"%c",x[j]+1);  //printed letters are one after original letters
-    }
+    encrypt(x,strlen(x));       //calls function encrypt to encrypt text
 }
