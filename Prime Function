@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+int random_num()
+{
+    int num;
+    if(10000-1000>(RAND_MAX))
+  {
+    printf("Warning range is to large!!");
+  }
+     num =(int)rand()%(10000-1000+1)+1000;
+     return num;
+}
+
+int prime()
+{
+ int j=2;
+ int number = random_num();
+ for(j=2; j <= number-1; j++)
+ {
+     if (number%j==0)
+     {
+        return 0;
+     }
+ }
+ return random_num();
+
+}
+int main()
+{   srand(time(NULL));
+    int num;
+    do{
+        num = prime();
+
+    }while(num==0);
+
+    printf("%d",num);
+}
