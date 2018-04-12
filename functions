@@ -1,7 +1,49 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 #define EC "encrypted.txt"
 #define DC "decrypted.txt"
+#define OTP "onetimepad.txt"
+#define OTPE "otp_encrypted.txt"
+#define OTPD "otp_decrypted.txt"
+
+void rand_string(int length)
+{
+    srand(time(NULL));
+    FILE*one_time=fopen(OTP,"w");
+    int j;
+    int k[length];
+    for(j=0;j<length;j++)
+    {
+        k[j]=(rand()%1000+1);
+        fprintf(one_time,"%d\n",k[j]);
+    }
+    fclose(one_time);
+}
+
+void add_string(char*array1,int*array2,int length)
+{
+    FILE*one_en=fopen(OTPE,"w");
+    int k;
+    for(k=0;k<length;k++)
+    {
+        fprintf(one_en,"%d\n",array1[k]+array2[k]);
+    }
+    fclose(one_en);
+}
+
+void subtract_string(char*array1,int*array2,int length)
+{
+    FILE*one_en=fopen(OTPD,"w");
+    int k;
+    for(k=0;k<length;k++)
+    {
+        fprintf(one_en,"%c",array1[k]-array2[k]);
+    }
+    fclose(one_en);
+}
+
 void encrypt(char*array,int length)
 {
     FILE*out_file=fopen(EC,"w");
@@ -37,24 +79,61 @@ void input_text_to_array_x_encrypt_decrypt()
     }
     else
        {
-         printf("This file exists; Enter 1 if you would like to encrypt this text and 2 is you would like to decrypt this text.\n");
+         printf("This file exists; Enter 1 if you would like to encrypt this text using a simple shift cypher, 2 if you would like to decrypt the your shift cypher text, 3 to use a one-time-pad to encrypt your text, and 4 to decrypt this text using the one-time-pad.\n");
        }
 
     int m=0;
-    char x[1];      //entire text without spaces can fit in one location
+    char x[1000000];      //entire text without spaces can fit in one location
     while (!feof(name_in)) //while you have not reached the end of this file, do this
 {
     fscanf(name_in,"%s",&x[m]);       //read name_in file and store characters in x array
 }
+
     int num;
     scanf("%d",&num);
     if (num==1)
     {
        encrypt(x,strlen(x));
     }
-    else
+    else if (num==2)
     {
       decrypt(x,strlen(x));
+    }
+    else if (num==3)
+    {
+        rand_string(strlen(x));
+        FILE*otpp=fopen(OTP,"r");
+        int p=0;
+        int y[strlen(x)];
+        while (!feof(otpp)) //while you have not reached the end of this file, do this
+            {
+                fscanf(otpp,"%d",&y[p]);
+                p++;
+            }
+        add_string(x,y,strlen(x));
+        fclose(otpp);
+    }
+    else if (num==4)
+    {
+        FILE*otpo=fopen(OTPE,"r");
+        int g=0;
+        char z[strlen(x)];
+        while (!feof(otpo))
+            {
+                fscanf(otpo,"%d",&z[g]);       //read name_in file and store characters in x array
+                g++;
+            }
+
+        FILE*otpu=fopen(OTP,"r");
+        int b=0;
+        int q[strlen(x)];      //entire text without spaces can fit in one location
+        for(b=0;b<strlen(x);b++)
+            {
+                fscanf(otpu,"%d",&q[b]);       //read name_in file and store characters in x array
+            }
+        subtract_string(z,q,strlen(x));
+        fclose(otpo);
+        fclose(otpu);
     }
     fclose(name_in);
 }
