@@ -4,8 +4,17 @@
 //creates a text file of a specific number of random numbers
 void rand_string(int length);
 
-//creates a text file that has the sum of a charactor's ACSII number and another number for a given length
+//creates a text file that has the sum of a charactor's ASCII number and another number for given number of values
 void add_string(char*array1,int*array2,int length);
 
-//creates a text file that has the difference of 
-void subtract_string(char*array1,int*array2,int length);
+//creates a text file that has the difference of two array values for a given number of values
+void subtract_string(int*array1,int*array2,int length);
+
+//creates a text file that has characters with ASCII numbers 1 greater than inputed characters in an array of a given length 
+void encrypt(char*array,int length);
+
+//creates a text file that has characters with ASCII numbers 1 less than inputed characters in an array of a given length 
+void decrypt(char*array,int length);
+
+//reads in a file name and reads in the characters to an array and offers options of how to encrypt/decrypt the information in the array
+void input_text_to_array_x_encrypt_decrypt();
