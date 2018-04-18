@@ -4,7 +4,7 @@
 //creates a text file of a specific number of random numbers
 void rand_string(int length);
 
-//creates a text file that has the sum of a charactor's ASCII number and another number for given number of values
+//creates a text file that has the sum of a charactor's ASCII number and another number for a given number of values
 void add_string(char*array1,int*array2,int length);
 
 //creates a text file that has the difference of two array values for a given number of values
