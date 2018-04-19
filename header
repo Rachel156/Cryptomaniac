@@ -18,3 +18,28 @@ void decrypt(char*array,int length);
 
 //reads in a file name and reads in the characters to an array and offers options of how to encrypt/decrypt the information in the array
 void input_text_to_array_x_encrypt_decrypt();
+
+
+Public Key encryption functions
+
+int prime_gen(int a, int b)
+//generates a random number between a and b
+
+int number(int a, int b)
+//calls prime_gen and actually returns a prime number in given range
+
+int prime_check (int x)
+// checks if a number is prime
+
+void gen_e()
+//generates possible prime values for the key e that are common denominators with d
+
+void gen_d(int x)
+// generates values for d that are prime common denominators with e
+
+void encrypt()
+//encrypts message 
+
+void decrpyt()
+// decrpyts message
+
