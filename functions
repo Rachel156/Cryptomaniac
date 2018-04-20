@@ -75,7 +75,7 @@ void input_text_to_array_x_encrypt_decrypt()
     if(name_in == NULL)
     {
         printf("Error: input file does not exist \n");          //if...else statement to let user know if file exists
-        printf("Exeqution terminated \n");
+        printf("Execution terminated \n");
     }
     else
        {
