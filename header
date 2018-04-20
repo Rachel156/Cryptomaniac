@@ -32,10 +32,10 @@ int prime_check (int x)
 // checks if a number is prime
 
 void gen_e()
-//generates possible prime values for the key e that are common denominators with d
+//generates possible prime values for the key e that are between 1 and m
 
 void gen_d(int x)
-// generates values for d that are prime common denominators with e
+// generates prime values for d
 
 void encrypt()
 //encrypts message 
