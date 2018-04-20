@@ -8,7 +8,7 @@ void rand_string(int length);
 void add_string(char*array1,int*array2,int length);
 
 //creates a text file that has the difference of two array values for a given number of values
-void subtract_string(int*array1,int*array2,int length);
+void subtract_string(char*array1,int*array2,int length);
 
 //creates a text file that has characters with ASCII numbers 1 greater than inputed characters in an array of a given length 
 void encrypt(char*array,int length);
