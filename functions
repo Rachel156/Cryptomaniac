@@ -139,3 +139,61 @@ void input_text_to_array_x_encrypt_decrypt()
 }
 
 
+#include <stdio.h>
+
+//assumes little endian
+void printBits(size_t const size, void const * const ptr)
+{
+    unsigned char *b = (unsigned char*) ptr;
+    unsigned char byte;
+    int i, j;
+
+    for (i=size-1;i>=0;i--)
+    {
+        for (j=7;j>=0;j--)
+        {
+            byte = (b[i] >> j) & 1;
+            printf("%u", byte);
+        }
+    }
+    puts("");
+}
+
+struct header {
+char sgroupID[4];
+unsigned int dwFileLength;
+char sRiftType[4];
+
+};
+int main()
+{
+struct header h1;
+
+    FILE *myfile = fopen ("", "rb");         //open any type of type of file
+    if (myfile==NULL)
+    {
+        printf("ERROR: No file\n");             // If file doesnt exist print "no file"
+    }
+    else{
+    fread(&h1, sizeof(struct header), 1, myfile);
+    int i=0;
+    unsigned char *b;
+    int c;
+    while ((c = getc(myfile)) != EOF){
+        putchar(c);
+        //printBits(sizeof(c), c);
+    }
+
+        //fread(&b, sizeof(myfile),1, myfile);
+        //printBits( sizeof(b),&b);
+        //printf("%u",b);
+   /*     fread(buffer, strlen(c)+1, 1, fp);
+   printf("%s\n", buffer);
+   fclose(fp);*/
+
+
+}
+
+fclose(myfile);
+}
+
