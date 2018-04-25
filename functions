@@ -1,12 +1,160 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include <time.h>
 #define EC "encrypted.txt"
 #define DC "decrypted.txt"
 #define OTP "onetimepad.txt"
 #define OTPE "otp_encrypted.txt"
 #define OTPD "otp_decrypted.txt"
+----------------------------------------------------------------------------------------------------------------------------------------
+long int p,q,n,t,d,e;
+long int b[100], first[100], en[100];
+char msg[100];
+void gen_e();
+int number();
+void main_public();
+long int gen_d(long int x);
+void encrypt();
+void decrypt();
+
+void main_public()
+{
+   int i;
+ srand(time(NULL));
+ printf("Enter message (no spaces)\n");
+ scanf("%s", msg);
+ for(i=0; msg[i]!= NULL; i++)
+    b[i]=msg[i];
+ //keys
+     p = number(100,1);
+     q = number(100,1);
+     n = p*q;
+     t = (p-1)*(q-1);
+    gen_e();
+   encrypt();
+   decrypt();
+
+}
+int prime_gen(int a, int b)
+{
+    int i;
+ int number = (int)rand()%(a-b+1)+b;
+ for(i=2;  i<= number-1; i++)
+ {
+     if (number%i==0)
+     {
+        return 0;
+     }
+ }
+ return number;
+
+}
+int prime_check (int x)
+{
+    int i;
+    int num = sqrt(x);
+    for (i = 2; i<=num; i++)
+    {
+        if(x%i==0)
+            return 0;
+    }
+    return 1;
+}
+int number(int a, int b)
+{
+  int nbr;
+  do{
+
+    nbr = prime_gen(a,b);
+
+  }while(nbr==0);
+  return nbr;
+}
+void gen_e()
+{
+    long int val;
+   int i, j = 0;
+    for (i=2; i < t; i++)
+    {
+        if(t%i == 0)
+            continue;
+            val = prime_check(i);
+        if(val==1&&i!=p&&i!=q)
+        {
+            e=i; // possible primes for e
+            val=gen_d(e);
+            if(val>0)
+            {
+                j=0;
+                d = val;
+                j++;
+            }
+        }
+
+    }
+}
+long int gen_d(long int x)
+{
+    long int k =1;
+    while(1)
+    {
+        k=k+t;
+        if(k%x==0)
+            return (k/x);
+    }
+}
+
+void encrypt()
+{
+long int a, c, k, length,j;
+int i = 0;
+length = strlen(msg);
+while(i!= length)
+{
+    a = b[i]; //first asi value in message
+
+    k = 1;
+    for(j=0; j < e; j++)
+    {
+        k = k*a;
+        k = k%n;
+    }
+    first[i]=k;
+    c = k ;
+    en[i]= c;
+    i++;
+}
+en[i]=-1;
+printf("Encryption \n");
+for(i=0; en[i]!=-1; i++)
+    printf("%c", en[i]);
+}
+
+ void decrypt()
+{
+	long int a,c,k,j;
+	int i=0;
+	while(en[i]!=-1)
+	{
+		c =first[i];
+		k=1;
+		for(j=0;j<d;j++)
+		{
+			k=k*c;
+			k=k%n;
+		}
+		a=k;
+		b[i]=a;
+		i++;
+	}
+	b[i]=-1;
+	printf("\nTHE DECRYPTED MESSAGE IS\n");
+	for(i=0;b[i]!=-1;i++)
+		printf("%c",b[i]);
+}
+-------------------------------------------------------------------------------------------------------------------------------------
 
 void rand_string(int length)
 {
