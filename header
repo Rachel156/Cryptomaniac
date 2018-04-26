@@ -1,6 +1,5 @@
 
 
-
 //creates a text file of a specific number of random numbers
 void rand_string(int length);
 
@@ -10,36 +9,43 @@ void add_string(char*array1,int*array2,int length);
 //creates a text file that has the difference of two array values for a given number of values
 void subtract_string(char*array1,int*array2,int length);
 
-//creates a text file that has characters with ASCII numbers 1 greater than inputed characters in an array of a given length 
-void encrypt(char*array,int length);
+//creates a text file that has characters with ASCII numbers 1 greater than inputed characters in an array of a given length
+void encrypts(char*array,int length);
 
-//creates a text file that has characters with ASCII numbers 1 less than inputed characters in an array of a given length 
-void decrypt(char*array,int length);
+//creates a text file that has characters with ASCII numbers 1 less than inputed characters in an array of a given length
+void decrypts(char*array,int length);
 
 //reads in a file name and reads in the characters to an array and offers options of how to encrypt/decrypt the information in the array
 void input_text_to_array_x_encrypt_decrypt();
 
 
-Public Key encryption functions
-
-int prime_gen(int a, int b);
+//Public Key encryption functions
 //generates a random number between a and b
+int prime_gen(int a, int b);
 
-int number(int a, int b);
 //calls prime_gen and actually returns a prime number in given range
+int number(int a, int b);
 
-int prime_check (int x);
 // checks if a number is prime
+int prime_check (int x);
 
-void gen_e();
 //generates possible prime values for the key e that are between 1 and m
+void gen_e();
 
-void gcd(int x, int y);
 // generates greatest common denominator
+void gcd(int x, int y);
 
+//encrypts message
 void encrypt();
-//encrypts message 
 
-void decrpyt();
 // decrpyts message
+void decrpyt();
+
+void main_public();
+
+long int gen_d(long int x);
+
+// Represents integer values as 1’s and 0’s
+void printBits(size_t const size, void const * const ptr);
+
 
