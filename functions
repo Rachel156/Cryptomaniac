@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,16 +9,11 @@
 #define OTP "onetimepad.txt"
 #define OTPE "otp_encrypted.txt"
 #define OTPD "otp_decrypted.txt"
-----------------------------------------------------------------------------------------------------------------------------------------
+#include "header.h"
+
 long int p,q,n,t,d,e;
 long int b[100], first[100], en[100];
 char msg[100];
-void gen_e();
-int number();
-void main_public();
-long int gen_d(long int x);
-void encrypt();
-void decrypt();
 
 void main_public()
 {
@@ -35,8 +31,8 @@ void main_public()
     gen_e();
    encrypt();
    decrypt();
-
 }
+
 int prime_gen(int a, int b)
 {
     int i;
@@ -49,8 +45,8 @@ int prime_gen(int a, int b)
      }
  }
  return number;
-
 }
+
 int prime_check (int x)
 {
     int i;
@@ -62,6 +58,7 @@ int prime_check (int x)
     }
     return 1;
 }
+
 int number(int a, int b)
 {
   int nbr;
@@ -72,6 +69,7 @@ int number(int a, int b)
   }while(nbr==0);
   return nbr;
 }
+
 void gen_e()
 {
     long int val;
@@ -95,6 +93,7 @@ void gen_e()
 
     }
 }
+
 long int gen_d(long int x)
 {
     long int k =1;
@@ -154,7 +153,6 @@ for(i=0; en[i]!=-1; i++)
 	for(i=0;b[i]!=-1;i++)
 		printf("%c",b[i]);
 }
--------------------------------------------------------------------------------------------------------------------------------------
 
 void rand_string(int length)
 {
@@ -192,7 +190,7 @@ void subtract_string(char*array1,int*array2,int length)
     fclose(one_en);
 }
 
-void encrypt(char*array,int length)
+void encrypts(char*array,int length)
 {
     FILE*out_file=fopen(EC,"w");
     int j;
@@ -203,7 +201,7 @@ void encrypt(char*array,int length)
     fclose(out_file);
 }
 
-void decrypt(char*array,int length)
+void decrypts(char*array,int length)
 {
     FILE*out_file=fopen(DC,"w");
     int j;
@@ -217,7 +215,7 @@ void decrypt(char*array,int length)
 void input_text_to_array_x_encrypt_decrypt()
 {
     char file_name[20];             //creates string where a file name can go
-    printf("Enter a file name including the extension (txt, csv, ect.) \n");      //prompts user to enter a file name
+    printf("Ok! Enter a file name including the extension (txt, csv, ect.) \n");      //prompts user to enter a file name
     scanf("%s",&file_name);     //stores file name in file_name
     FILE * name_in = fopen(file_name, "r");     //tells computer to open and read file_name
     if(name_in == NULL)
@@ -227,7 +225,8 @@ void input_text_to_array_x_encrypt_decrypt()
     }
     else
        {
-         printf("This file exists; Enter 1 if you would like to encrypt this text using a simple shift cypher, 2 if you would like to decrypt the your shift cypher text, 3 to use a one-time-pad to encrypt your text, and 4 to decrypt this text using the one-time-pad.\n");
+         printf("Yay! This file exists. Enter the number of what you want to do with this file.\n");
+         printf("1: Encrypt text using simple shift cypher\n2: Decrypt text using simple shift cypher\n3: Encrypt and decrypt text using a one-time-pad\n");
        }
 
     int m=0;
@@ -241,14 +240,19 @@ void input_text_to_array_x_encrypt_decrypt()
     scanf("%d",&num);
     if (num==1)
     {
-       encrypt(x,strlen(x));
+        system("cls");
+       encrypts(x,strlen(x));
+       printf("Your file has been encrypted. Open the file titled encrypted.txt to see your encrypted text.");
     }
     else if (num==2)
     {
-      decrypt(x,strlen(x));
+        system("cls");
+      decrypts(x,strlen(x));
+      printf("Your file has been decrypted. Open the file titled decrypted.txt to see your decrypted text.");
     }
     else if (num==3)
     {
+        system("cls");
         rand_string(strlen(x));
         FILE*otpp=fopen(OTP,"r");
         int p=0;
@@ -260,9 +264,8 @@ void input_text_to_array_x_encrypt_decrypt()
             }
         add_string(x,y,strlen(x));
         fclose(otpp);
-    }
-    else if (num==4)
-    {
+        printf("Your file has been encrypted. Open the file titled otp_encrypted.txt to see your encrypted message.\n");
+
         FILE*otpo=fopen(OTPE,"r");
         int g=0;
         char z[strlen(x)];
@@ -282,12 +285,12 @@ void input_text_to_array_x_encrypt_decrypt()
         subtract_string(z,q,strlen(x));
         fclose(otpo);
         fclose(otpu);
+    printf("This encrypted file has also been decrypted again. Open the file titled otp_decrypted.txt to see your decrypted text.\n");
     }
     fclose(name_in);
 }
 
 
-#include <stdio.h>
 
 //assumes little endian
 void printBits(size_t const size, void const * const ptr)
@@ -313,7 +316,7 @@ unsigned int dwFileLength;
 char sRiftType[4];
 
 };
-int main()
+/*int main()
 {
 struct header h1;
 
@@ -339,9 +342,9 @@ struct header h1;
    printf("%s\n", buffer);
    fclose(fp);*/
 
-
+/*
 }
 
 fclose(myfile);
 }
-
+*/
