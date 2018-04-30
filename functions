@@ -358,3 +358,28 @@ struct header h1;
 fclose(myfile);
 }
 */
+
+void binary(void)
+{
+FILE *fp; /* file pointer */
+int i;
+/* open file for output */
+if ((fp = fopen("myfile", "wb"))==NULL){
+printf("Cannot open file \n");
+exit(1);
+}
+i=100;
+if (fwrite(&i, 2, 1, fp) !=1){
+printf("Write Error");
+exit(1);
+}
+fclose(fp);
+/* open file for input */
+if ((fp =fopen("myfile", "rb"))==NULL){
+printf("Read Error");
+exit(1);
+}
+//printf();
+fclose(fp);
+}
+
