@@ -21,31 +21,30 @@ void input_text_to_array_x_encrypt_decrypt();
 
 //Public Key encryption functions
 //generates a random number between a and b
-int prime_gen(int a, int b);
+long int prime_gen(long int a, long int b);
 
 //calls prime_gen and actually returns a prime number in given range
-int number(int a, int b);
+long int number(long int a, long int b);
 
 // checks if a number is prime
-int prime_check (int x);
+long int prime_check (long int x);
 
 //generates possible prime values for the key e that are between 1 and m
 void gen_e();
-
-// generates greatest common denominator
-void gcd(int x, int y);
 
 //encrypts message
 void encrypt();
 
 // decrpyts message
-void decrpyt();
+void decrypt();
 
 void main_public();
 
 long int gen_d(long int x);
 
 // Represents integer values as 1’s and 0’s
-void printBits(size_t const size, void const * const ptr);
+void printBits(size_t const size, void const * const ptr);  //check if needed
+
+void binary(void);
 
 
