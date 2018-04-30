@@ -14,29 +14,41 @@
 long int p,q,n,t,d,e;
 long int b[100], first[100], en[100];
 char msg[100];
+void gen_e();
+long int number();
+void main_public();
+long int gen_d(long int x);
+void encrypt();
+void decrypt();
+
+int main()
+{
+    main_public();
+}
 
 void main_public()
 {
    int i;
  srand(time(NULL));
- printf("Enter message (no spaces)\n");
- scanf("%s", msg);
+ printf("ENTER MESSAGE (hit enter twice)\n");
+ fgets(msg, 100, stdin);
+ scanf("%[^\t\n]s", msg);
  for(i=0; msg[i]!= NULL; i++)
     b[i]=msg[i];
  //keys
-     p = number(100,1);
-     q = number(100,1);
+     p = number(500,1);
+     q = number(500,1);
      n = p*q;
      t = (p-1)*(q-1);
     gen_e();
    encrypt();
    decrypt();
-}
 
-int prime_gen(int a, int b)
+}
+long int prime_gen(long int a, long int b)
 {
     int i;
- int number = (int)rand()%(a-b+1)+b;
+ long int number = (long int)rand()%(a-b+1)+b;
  for(i=2;  i<= number-1; i++)
  {
      if (number%i==0)
@@ -45,12 +57,12 @@ int prime_gen(int a, int b)
      }
  }
  return number;
-}
 
-int prime_check (int x)
+}
+long int prime_check (long int x)
 {
     int i;
-    int num = sqrt(x);
+    long int num = sqrt(x);
     for (i = 2; i<=num; i++)
     {
         if(x%i==0)
@@ -58,10 +70,9 @@ int prime_check (int x)
     }
     return 1;
 }
-
-int number(int a, int b)
+long int number(long int a, long int b)
 {
-  int nbr;
+  long int nbr;
   do{
 
     nbr = prime_gen(a,b);
@@ -69,7 +80,6 @@ int number(int a, int b)
   }while(nbr==0);
   return nbr;
 }
-
 void gen_e()
 {
     long int val;
@@ -93,7 +103,6 @@ void gen_e()
 
     }
 }
-
 long int gen_d(long int x)
 {
     long int k =1;
@@ -153,6 +162,7 @@ for(i=0; en[i]!=-1; i++)
 	for(i=0;b[i]!=-1;i++)
 		printf("%c",b[i]);
 }
+
 
 void rand_string(int length)
 {
