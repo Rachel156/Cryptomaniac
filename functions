@@ -14,17 +14,6 @@
 long int p,q,n,t,d,e;
 long int b[100], first[100], en[100];
 char msg[100];
-void gen_e();
-long int number();
-void main_public();
-long int gen_d(long int x);
-void encrypt();
-void decrypt();
-
-int main()
-{
-    main_public();
-}
 
 void main_public()
 {
@@ -32,7 +21,7 @@ void main_public()
  srand(time(NULL));
  printf("ENTER MESSAGE (hit enter twice)\n");
  fgets(msg, 100, stdin);
- scanf("%[^\t\n]s", msg);
+ scanf("%[^\t\n]s",msg);
  for(i=0; msg[i]!= NULL; i++)
     b[i]=msg[i];
  //keys
@@ -43,8 +32,8 @@ void main_public()
     gen_e();
    encrypt();
    decrypt();
-
 }
+
 long int prime_gen(long int a, long int b)
 {
     int i;
@@ -57,8 +46,8 @@ long int prime_gen(long int a, long int b)
      }
  }
  return number;
-
 }
+
 long int prime_check (long int x)
 {
     int i;
@@ -70,6 +59,7 @@ long int prime_check (long int x)
     }
     return 1;
 }
+
 long int number(long int a, long int b)
 {
   long int nbr;
@@ -80,6 +70,7 @@ long int number(long int a, long int b)
   }while(nbr==0);
   return nbr;
 }
+
 void gen_e()
 {
     long int val;
@@ -103,6 +94,7 @@ void gen_e()
 
     }
 }
+
 long int gen_d(long int x)
 {
     long int k =1;
@@ -162,7 +154,6 @@ for(i=0; en[i]!=-1; i++)
 	for(i=0;b[i]!=-1;i++)
 		printf("%c",b[i]);
 }
-
 
 void rand_string(int length)
 {
@@ -226,7 +217,7 @@ void input_text_to_array_x_encrypt_decrypt()
 {
     char file_name[20];             //creates string where a file name can go
     printf("Ok! Enter a file name including the extension (txt, csv, ect.) \n");      //prompts user to enter a file name
-    scanf("%s",&file_name);     //stores file name in file_name
+    scanf("%s",file_name);     //stores file name in file_name
     FILE * name_in = fopen(file_name, "r");     //tells computer to open and read file_name
     if(name_in == NULL)
     {
@@ -364,22 +355,26 @@ void binary(void)
 FILE *fp; /* file pointer */
 int i;
 /* open file for output */
-if ((fp = fopen("myfile", "wb"))==NULL){
+if ((fp = fopen("myfile", "wb"))==NULL)
+{
 printf("Cannot open file \n");
 exit(1);
 }
+
 i=100;
-if (fwrite(&i, 2, 1, fp) !=1){
+if (fwrite(&i, 2, 1, fp) !=1)
+{
 printf("Write Error");
 exit(1);
 }
 fclose(fp);
+
 /* open file for input */
-if ((fp =fopen("myfile", "rb"))==NULL){
+if ((fp =fopen("myfile", "rb"))==NULL)
+{
 printf("Read Error");
 exit(1);
 }
 //printf();
 fclose(fp);
 }
-
