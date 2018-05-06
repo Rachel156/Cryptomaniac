@@ -4,14 +4,14 @@
 int main()
 {
     int c;
-    printf("Hello!\nFirst of all, enter the number for what type of file would you like to encrypt/decrypt today.\n");
-    printf("1: A text file\n2: A binary file\n");
+    printf("Hello!\nFirst of all, enter the number for what type of information would you like to encrypt/decrypt today.\n");
+    printf("1: Some text\n2: The binary from a file\n");
     scanf("%d",&c);
     if (c==1)
     {
         system("cls");
         int k;
-        printf("Great! A text file. Would you like to encrypt/decrypt a simple message using public key encryption or input a text file?\n");
+        printf("Great! Some text. Would you like to encrypt/decrypt a simple message using public key encryption or input a text file?\n");
         printf("1: Public key encryption\n");
         printf("2: Input a text file\n");
         scanf("%d",&k);
