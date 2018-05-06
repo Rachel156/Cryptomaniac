@@ -19,14 +19,14 @@ void main_public()
 {
    int i;
  srand(time(NULL));
- printf("ENTER MESSAGE (hit enter twice)\n");
+ printf("ENTER MESSAGE \n");
  fgets(msg, 100, stdin);
  scanf("%[^\t\n]s",msg);
  for(i=0; msg[i]!= NULL; i++)
     b[i]=msg[i];
  //keys
-     p = number(500,1);
-     q = number(500,1);
+     p = number(200,1);
+     q = number(200,1);
      n = p*q;
      t = (p-1)*(q-1);
     gen_e();
@@ -215,8 +215,8 @@ void decrypts(char*array,int length)
 
 void input_text_to_array_x_encrypt_decrypt()
 {
-    char file_name[20];             //creates string where a file name can go
-    printf("Ok! Enter a file name including the extension (txt, csv, ect.) \n");      //prompts user to enter a file name
+    char file_name[20];
+    printf("Ok! Enter a text file name including the extension .txt \n");      //prompts user to enter a file name
     scanf("%s",file_name);     //stores file name in file_name
     FILE * name_in = fopen(file_name, "r");     //tells computer to open and read file_name
     if(name_in == NULL)
@@ -231,7 +231,7 @@ void input_text_to_array_x_encrypt_decrypt()
        }
 
     int m=0;
-    char x[1000000];      //entire text without spaces can fit in one location
+    char x[1000000];
     while (!feof(name_in)) //while you have not reached the end of this file, do this
 {
     fscanf(name_in,"%s",&x[m]);       //read name_in file and store characters in x array
@@ -291,90 +291,43 @@ void input_text_to_array_x_encrypt_decrypt()
     fclose(name_in);
 }
 
-
-
-//assumes little endian
-void printBits(size_t const size, void const * const ptr)
+void decrypt_binary(char*array,int length)
 {
-    unsigned char *b = (unsigned char*) ptr;
-    unsigned char byte;
-    int i, j;
-
-    for (i=size-1;i>=0;i--)
+    FILE*out_file=fopen("binary_decrypted.txt","w");
+    int j;
+    for(j=0;j<length;j++)
     {
-        for (j=7;j>=0;j--)
-        {
-            byte = (b[i] >> j) & 1;
-            printf("%u", byte);
-        }
+        fprintf(out_file,"%d\n",array[j]-5);
     }
-    puts("");
+    printf("The binary from your file has been encrypted and then decrypted again. Open the files binary_encrypted and binary_decrypted to see your results.");
+    fclose(out_file);
 }
 
-struct header {
-char sgroupID[4];
-unsigned int dwFileLength;
-char sRiftType[4];
-
-};
-/*int main()
+void encrypt_binary(char*array,int length)
 {
-struct header h1;
-
-    FILE *myfile = fopen ("", "rb");         //open any type of type of file
-    if (myfile==NULL)
+    FILE*out_file=fopen("binary_encrypted.txt","w");
+    int j;
+    char arrayk[length];
+    for(j=0;j<length;j++)
     {
-        printf("ERROR: No file\n");             // If file doesnt exist print "no file"
+        fprintf(out_file,"%d\n",array[j]+5);
+        arrayk[j]=array[j]+5;
     }
-    else{
-    fread(&h1, sizeof(struct header), 1, myfile);
-    int i=0;
-    unsigned char *b;
-    int c;
-    while ((c = getc(myfile)) != EOF){
-        putchar(c);
-        //printBits(sizeof(c), c);
-    }
-
-        //fread(&b, sizeof(myfile),1, myfile);
-        //printBits( sizeof(b),&b);
-        //printf("%u",b);
-   /*     fread(buffer, strlen(c)+1, 1, fp);
-   printf("%s\n", buffer);
-   fclose(fp);*/
-
-/*
+    decrypt_binary(arrayk,length);
+    fclose(out_file);
 }
 
-fclose(myfile);
-}
-*/
-
-void binary(void)
+void binary()
 {
-FILE *fp; /* file pointer */
-int i;
-/* open file for output */
-if ((fp = fopen("myfile", "wb"))==NULL)
-{
-printf("Cannot open file \n");
-exit(1);
-}
-
-i=100;
-if (fwrite(&i, 2, 1, fp) !=1)
-{
-printf("Write Error");
-exit(1);
-}
-fclose(fp);
-
-/* open file for input */
-if ((fp =fopen("myfile", "rb"))==NULL)
-{
-printf("Read Error");
-exit(1);
-}
-//printf();
-fclose(fp);
+    char file_name[20];
+    printf("Ok! Enter a file name including the extension (txt, csv, ect.) \n");
+    scanf("%s",file_name);
+    char data[100];
+    FILE*myfile=fopen(file_name,"rb");
+    fread(data,sizeof(int),strlen(data),myfile);
+    int i;
+    for(i=0;i<strlen(data);i++)
+        data[i];
+    encrypt_binary(data,strlen(data));
+    fclose(myfile);
 }
