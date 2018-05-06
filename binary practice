@@ -8,7 +8,7 @@ void decrypt_binary(char*array,int length)
     int j;
     for(j=0;j<length;j++)
     {
-        fprintf(out_file,"%d\n",array[j]-1);
+        fprintf(out_file,"%d\n",array[j]/5);
     }
     fclose(out_file);
 }
@@ -20,8 +20,8 @@ void encrypt_binary(char*array,int length)
     char arrayk[length];
     for(j=0;j<length;j++)
     {
-        fprintf(out_file,"%d\n",array[j]+1);
-        arrayk[j]=array[j]+1;
+        fprintf(out_file,"%d\n",array[j]*5);
+        arrayk[j]=array[j]*5;
     }
     decrypt_binary(arrayk,length);
     fclose(out_file);
