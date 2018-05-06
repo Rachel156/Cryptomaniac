@@ -1,9 +1,9 @@
 
-
+//One time pad and simple shift cipher functions
 //creates a text file of a specific number of random numbers
 void rand_string(int length);
 
-//creates a text file that has the sum of a charactor's ASCII number and another number for a given number of values
+//creates a text file that has the sum of a character's ASCII number and another number for a given number of values
 void add_string(char*array1,int*array2,int length);
 
 //creates a text file that has the difference of two array values for a given number of values
@@ -38,13 +38,20 @@ void encrypt();
 // decrpyts message
 void decrypt();
 
+//receives message and creates keys
 void main_public();
 
 long int gen_d(long int x);
 
-// Represents integer values as 1’s and 0’s
-void printBits(size_t const size, void const * const ptr);  //check if needed
-
+//Binary functions
+//inputs binary from a file
 void binary(void);
+
+//encrypts binary data
+void encrypt_binary(char*array,int length);
+
+//decrypts binary data
+void decrypt_binary(char*array,int length);
+
 
 
